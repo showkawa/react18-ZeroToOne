@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>react 01 - basic for JS</title>
+    <script>
+        /* 01 变量的申明
+         *
+         * var - no block-leave scope 
+         * let - block-leave scope
+         * const - block-leave scope
+         * 
+         * */
+
+        (function () {
+            if (true) {
+                var niubi = 6;
+            }
+        })();
+        console.log(niubi);
+
+
+        var a, b;
+        const arr = ["nick", "neo"];
+        [a, b] = arr;
+
+
+        console.log(a, b);
+
+        arr2 = ["A380", "A355", "A330", "A310"];
+        const [d, e, ...f] = arr2;
+        console.log("d=" + d, "e=" + e, "f=" + f);
+
+        const info = {
+            id: 12323,
+            name: "ATM566",
+            locations: "sz"
+        }
+
+        let g, h, j;
+        ({
+            id: g,
+            name: h,
+            location: j
+        } = info);
+        console.log(g, h, j);
+
+
+        // if the attribute name are same with the variable
+        // for example: const {id:id,name:name,location:location}=info;, can use a simple style as below
+        const {
+            id,
+            name,
+            locations
+        } = info;
+        console.log(id, name, locations);
+
+        // exchange var
+        l = 20, m = 30;
+        [l, m] = [m, l];
+        console.log(l, m);
+
+        arr3 = [7, 9, 8];
+        [arr3[1], arr3[2]] = [arr3[2], arr3[1]]
+        console.log(arr3);
+
+
+        
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
