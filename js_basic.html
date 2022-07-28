@@ -14,24 +14,24 @@
          * const - block-leave scope
          * 
          * */
-
         (function () {
-            if (true) {
-                var niubi = 6;
-            }
+            var niubi = 6;
         })();
-        console.log(niubi);
+        try {
+                    console.log(niubi);
+        } catch (error) {
+            console.log(error)
+        }
 
 
+        /*          02 解构赋值           * */
         var a, b;
         const arr = ["nick", "neo"];
         [a, b] = arr;
-
-
         console.log(a, b);
 
         arr2 = ["A380", "A355", "A330", "A310"];
-        const [d, e, ...f] = arr2;
+        const [d, e, ...f] = arr2;   //  ...变量， 会接受后边所有的元素
         console.log("d=" + d, "e=" + e, "f=" + f);
 
         const info = {
@@ -48,9 +48,7 @@
         } = info);
         console.log(g, h, j);
 
-
-        // if the attribute name are same with the variable
-        // for example: const {id:id,name:name,location:location}=info;, can use a simple style as below
+        // 如果属性名和变量名一样， 则可以简写
         const {
             id,
             name,
@@ -58,7 +56,7 @@
         } = info;
         console.log(id, name, locations);
 
-        // exchange var
+        // 变量交换
         l = 20, m = 30;
         [l, m] = [m, l];
         console.log(l, m);
@@ -66,9 +64,6 @@
         arr3 = [7, 9, 8];
         [arr3[1], arr3[2]] = [arr3[2], arr3[1]]
         console.log(arr3);
-
-
-        
     </script>
 </head>
 
