@@ -18,7 +18,7 @@
             var niubi = 6;
         })();
         try {
-                    console.log(niubi);
+            console.log(niubi);
         } catch (error) {
             console.log(error)
         }
@@ -64,6 +64,39 @@
         arr3 = [7, 9, 8];
         [arr3[1], arr3[2]] = [arr3[2], arr3[1]]
         console.log(arr3);
+
+        /*    03  展开     ******/
+        function sumAll(a, b, c) {
+            return a + b + c;
+        }
+        // 展开数组
+        const arr4 = [7, 8, 9];
+        console.log(sumAll(...arr4));
+
+        const arr5 = [...arr4, 1, 2, 3];
+        console.log(arr5);
+        // 展开对象
+        const obj = { ...info };
+        console.log(obj);
+        console.log({ ...info, code: "A00019" })
+
+        /*    04  箭头函数  ******/
+        const fn = () => 'asd';
+        console.log(fn());
+        const fn2 = a => a * a;
+        console.log(fn2(10));
+        const fn3 = (a, b, c) => a + b + c; // 多个入参需要用括号括起来
+        console.log(fn3(...arr4));
+        const fn4 = () => ({ ...obj, id: "10086" });
+        console.log(fn4());
+
+
+
+
+        /*    05  模块化    *******/
+        /*    06  类       *******/
+        /*    07  this     *******/
+
     </script>
 </head>
 
