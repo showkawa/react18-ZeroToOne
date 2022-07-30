@@ -3,10 +3,11 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
     <title>react 01 - basic for JS</title>
-    <script>
+    <script type="module">
+
         /* 01 变量的申明
          *
          * var - no block-leave scope 
@@ -92,8 +93,47 @@
 
 
 
+        function fn5(){
+		//arguments 保存函数的实参
+            console.log(arguments.length);
+        }
+        fn5();
 
-        /*    05  模块化    *******/
+        const fn51= () => {
+		// 箭头函数中没有arguments 
+            console.log(arguments);
+        }
+        try {
+            fn51();
+        } catch (error) {
+            console.log('箭头函数',error)
+        }
+
+        // 箭头函数中没有自己的this，它的this总之指向外层作用域的this
+        const fn6 =() => {
+            console.log(this);
+        }
+        fn6();
+
+        const obj2 = {
+            locate: ()=> {
+                console.log(this);
+            }
+        }
+        obj2.locate();
+
+        const obj3 = {
+            locate: function(){
+                console.log(this);
+            }
+        }
+        obj3.locate();
+
+        /*    05  模块化  （将一个大的项目拆成一个个小的模块）  *******/
+		import {kawa, objs as obj4, notfound} from './basic.js';
+        // console.log(kawa);ss
+
+        
         /*    06  类       *******/
         /*    07  this     *******/
 
