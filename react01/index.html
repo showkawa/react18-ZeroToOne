@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React01</title>
+    <script src="js/react.development.js"></script>
+    <script src="js/react-dom.development.js"></script>
+
+</head>
+
+<body>
+    <div id="root"></div>
+    <script>
+        //create <div> by DOM
+        const div = document.createElement('div');
+        console.log(div);
+        div.innerText = "this is a <div>";
+        const root = document.getElementById("root");
+        root.appendChild(div);
+        
+
+        // create <div> by React
+        // params: 1.element name 2.element attribute 3.the child element of element
+        const div2 = React.createElement("div",{},"this is a <div> create by React");
+        console.log(div2);
+        // create Root element
+        const root2 = ReactDOM.createRoot(document.getElementById("root"));
+        // render div to root element
+        root2.render(div2);
+    </script>
+</body>
+
+</html>
