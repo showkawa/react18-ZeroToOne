@@ -1,0 +1,16 @@
+.date {
+    width: 20%;
+    background-color: #fff;
+    border-radius: 10px;
+    font-weight: bold;
+    text-align: center;
+}
+.month {
+    height: 25%;
+    background-color: red;
+    color: #fff;
+}
+.day {
+    height: 75%;
+    font-size: 50px;
+}
