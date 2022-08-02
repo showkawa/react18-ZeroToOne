@@ -1,14 +1,15 @@
 import Date from './date/Date';
 import './LogsItem.css';
 
-const LogsItem = () => {
+const LogsItem = (props) => {
+    console.log(props);
     return <div className="item">
-        <Date />
+        <Date date={props.date}/>
         <div className="content">
             <h2 className="desc">
-                Learn SpringBoot
+                {props.desc}
             </h2>
-            <div className="time">40 mins</div>
+            <div className="time">{props.time}</div>
         </div>
     </div>;
 };

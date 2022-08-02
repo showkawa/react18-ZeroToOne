@@ -1,9 +1,11 @@
 import './Date.css';
 
-const Date = () => {
+const Date = (props) => {
+    const m = props.date.getMonth();
+    const d = props.date.getDate();
     return <div className="date">
-        <div className="month">July</div>
-        <div className="day">01</div>
+        <div className="month">{m}</div>
+        <div className="day">{d}</div>
     </div>;
 };
 
