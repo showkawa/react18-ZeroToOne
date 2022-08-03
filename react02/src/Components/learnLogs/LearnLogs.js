@@ -1,9 +1,10 @@
 import LogsItem from './logsItem/LogsItem';
 import './LearnLogs.css';
+import { useState } from 'react';
 
 const LearnLogs = () => {
 
-    const itemList = [
+    const initItems = [
         {
             id: 100001,
             date: new Date(2022, 1, 20, 18, 20),
@@ -30,8 +31,38 @@ const LearnLogs = () => {
         }
     ];
 
-    const itemData = itemList.map(item => <LogsItem key={item.id} date={item.date} desc={item.desc} time={item.time} />);
-    return itemData;
+    const [items, setItems] = useState(initItems);
+
+    const addItem = () => {
+        const newItem = {
+            id: Math.random()*100000000000+1,
+            date: new Date(2022, 9, 20, 18, 20),
+            desc: 'Learn ELFK',
+            time: '90 mins'
+        }
+        items.push(newItem);
+        const newItems = Object.assign([], items)
+        setItems(newItems);
+        console.log("===  addItem  ===");
+        console.log("items => ", newItems);
+    };
+
+    const removeItem = () => {
+        items.pop();
+        const newItems = Object.assign([], items)
+        setItems(newItems);
+        console.log("===  removeItem  ===");
+        console.log("items => ", newItems);
+    };
+
+
+    const itemData = items.map(item => <LogsItem key={item.id} date={item.date} desc={item.desc} time={item.time} />);
+    return <div>{itemData}
+        <div>
+            <button className="btn" onClick={addItem}>Add item</button>
+            <button className="btn" onClick={removeItem}>Remove last item</button>
+        </div>
+    </div>;
 };
 
 export default LearnLogs;
