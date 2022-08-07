@@ -1,3 +1,4 @@
+import Com from './com/Com';
 import Date from './date/Date';
 import './LogsItem.css';
 
@@ -10,6 +11,9 @@ const LogsItem = (props) => {
                 {props.desc}
             </h2>
             <div className="time">{props.time}</div>
+        </div>
+        <div className="com">
+            <Com {...props}/>
         </div>
     </div>;
 };
