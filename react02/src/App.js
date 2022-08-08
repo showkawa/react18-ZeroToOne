@@ -1,9 +1,13 @@
 import LearnLogs from './Components/learnLogs/LearnLogs';
+import LogForm from './Components/logForm/LogForm';
 
 const App = () => {
-    return <div className="learn-logs">
+    return <>
+    <LogForm className="card"></LogForm>
+    <div className="learn-logs">
         <LearnLogs/>
-    </div>;
+    </div>
+    </>;
 };
 
 export default App;
