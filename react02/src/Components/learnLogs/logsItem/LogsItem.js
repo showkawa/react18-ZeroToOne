@@ -3,7 +3,6 @@ import Date from './date/Date';
 import './LogsItem.css';
 
 const LogsItem = (props) => {
-    console.log(props);
     return <div className="item">
         <Date date={props.date}/>
         <div className="content">
