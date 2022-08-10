@@ -13,12 +13,6 @@ const Card = (props) => {
         }
     );
 
-    useState
-
-    const addItem = () => {
-
-    };
-
     const removeItem = () => {
 
     };
@@ -39,14 +33,13 @@ const Card = (props) => {
     const formSubmit = (event) => {
         event.preventDefault();
 
-        console.log(formData);
+        props.onSaveLogForm(formData);
 
         setFormData({
             date: '',
             desc: '',
             time: ''
         })
-
 
     }
 
@@ -68,7 +61,7 @@ const Card = (props) => {
                 <input id="time" type="text" onChange={timeOnChange} value={formData.time} />
             </div>
             <div>
-                <button className="btn" onClick={addItem}>Add item</button>
+                <button className="btn">Add item</button>
             </div>
         </form>
         <button className="btn" onClick={removeItem}>Remove last item</button>
