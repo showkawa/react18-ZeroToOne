@@ -13,9 +13,7 @@ const Card = (props) => {
         }
     );
 
-    const removeItem = () => {
 
-    };
 
     const dateOnChange = (event) => {
         //event.target 是触发事件的DOM对象
@@ -64,7 +62,7 @@ const Card = (props) => {
                 <button className="btn">Add item</button>
             </div>
         </form>
-        <button className="btn" onClick={removeItem}>Remove last item</button>
+        
     </>;
 }
 

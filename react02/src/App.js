@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import LearnLogs from './Components/learnLogs/LearnLogs';
 import LogForm from './Components/logForm/LogForm';
+import './App.css';
+import ConfirmModal from './Components/UI/ConfirmModal/ConfirmModal';
 
 const App = () => {
 
@@ -38,10 +40,16 @@ const App = () => {
         setItems([formData, ...items]);
     }
 
+    const delLogById = (itemId) => {
+        const newItems = items.filter(item => item.id !== itemId);
+        setItems(newItems);
+    }
+
     return <>
+        <ConfirmModal></ConfirmModal>
         <LogForm className="card" onSaveLogForm={saveLogForm}></LogForm>
         <div className="learn-logs">
-            <LearnLogs items={items} />
+            {items.length ? <LearnLogs items={items} onDelLog={delLogById} /> : <div className="emptyLogs">No Learning Record</div>}
         </div>
     </>;
 };

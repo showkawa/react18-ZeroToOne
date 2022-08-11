@@ -1,0 +1,29 @@
+.confirmModal {
+    display: flex;
+    flex-flow: column;
+    width: 20em;
+    height: 10em;
+    background-color: white;
+    position: absolute;
+    margin: auto;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 5px;
+}
+.confirmText {
+    display: flex;
+    justify-content: space-around;
+    font: 20px solid;
+    height: 6em;
+}
+.confirmButton {
+    flex: auto;
+    display: flex;
+    justify-content: space-around;
+}
+.confirmButton button{
+    width: 30%;
+    margin: 5px 0;
+}

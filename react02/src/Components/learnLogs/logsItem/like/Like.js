@@ -1,7 +1,8 @@
 import React from 'react';
+import './Like.css';
 
 
-class Com extends React.Component {
+class Like extends React.Component {
 
     state ={
         kawa:132
@@ -19,10 +20,9 @@ class Com extends React.Component {
        
         return <div ref={this.comRef}>
             <div>Like-{this.state.kawa}</div>
-            <div>{this.props.desc}</div>
-            <button onClick={this.cli}>Show</button>
+            <button onClick={this.cli}>Print Log</button>
         </div>;
     }
 }
  
-export default Com;
+export default Like;
