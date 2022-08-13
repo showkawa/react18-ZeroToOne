@@ -4,6 +4,9 @@ import { useState } from 'react';
 
 const LearnLogs = (props) => {
 
+    let filterData = props.items.filter(item => item.date.getFullYear() === 2022);
+    console.log(filterData);
+
     return <div>
         {props.items.map((item) => <LogsItem
             key={item.id}

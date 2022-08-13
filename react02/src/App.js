@@ -8,13 +8,13 @@ const App = () => {
     const [items, setItems] = useState([
         {
             id: 100001,
-            date: new Date(2022, 1, 20, 18, 20),
+            date: new Date(2020, 1, 20, 18, 20),
             desc: 'Learn Apache',
             time: '45'
         },
         {
             id: 10002,
-            date: new Date(2022, 3, 17, 18, 20),
+            date: new Date(2021, 3, 17, 18, 20),
             desc: 'Learn SpringBoot',
             time: '25'
         },
