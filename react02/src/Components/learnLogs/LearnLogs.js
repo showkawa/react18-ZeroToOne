@@ -1,19 +1,29 @@
 import LogsItem from './logsItem/LogsItem';
 import './LearnLogs.css';
+import LogFilter from '../logFilter/LogFilter';
 import { useState } from 'react';
 
 const LearnLogs = (props) => {
 
-    let filterData = props.items.filter(item => item.date.getFullYear() === 2022);
-    console.log(filterData);
+    const [year, setYear] = useState(2022);
+
+    let filterData = props.items.filter(item => { 
+        const filterYear = typeof item.date === "string" ? new Date(item.date).getFullYear() : item.date.getFullYear();
+        return filterYear === year
+    });
+
+    const changeFilter = (year) => {
+        setYear(year);
+    };
 
     return <div>
-        {props.items.map((item) => <LogsItem
+        <LogFilter onChangeFilter={changeFilter} year={year}></LogFilter>
+        {filterData.length ? filterData.map((item) => <LogsItem
             key={item.id}
             date={item.date}
             desc={item.desc}
             time={item.time}
-            onDelLog={() => props.onDelLog(item.id)} />)}
+            onDelLog={() => props.onDelLog(item.id)} />) : <div className="emptyLogs">No Learning Record</div>}
     </div>;
 };
 

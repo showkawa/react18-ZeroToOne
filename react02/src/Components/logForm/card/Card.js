@@ -3,7 +3,6 @@ import './Card.css';
 
 const Card = (props) => {
 
-    console.log(props.children);
 
     const [formData, setFormData] = useState(
         {

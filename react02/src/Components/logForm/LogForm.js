@@ -8,6 +8,6 @@ const LogForm = (props) => {
     }
 
 
-    return <Card className="card" onSaveLogForm={saveLogForm}>"!!!!!!! Card Content !!!!!!!!"</Card>;
+    return <Card className="card" onSaveLogForm={saveLogForm}/>
 }
 export default LogForm;

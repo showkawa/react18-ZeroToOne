@@ -10,6 +10,7 @@ const LogsItem = (props) => {
 
     const removeItem = () => {
         setShowConfirm(true);
+
     };
 
     const cancelConfirmModal = () => {
@@ -18,6 +19,7 @@ const LogsItem = (props) => {
 
     const okConfirmModal = () => {
         props.onDelLog();
+        setShowConfirm(false);
     }
 
     return <div className="item">

@@ -5,16 +5,18 @@ import './App.css';
 
 const App = () => {
 
+    console.log("<init APP>");
+
     const [items, setItems] = useState([
         {
             id: 100001,
-            date: new Date(2020, 1, 20, 18, 20),
+            date: new Date(2021, 1, 20, 18, 20),
             desc: 'Learn Apache',
             time: '45'
         },
         {
             id: 10002,
-            date: new Date(2021, 3, 17, 18, 20),
+            date: new Date(2022, 3, 17, 18, 20),
             desc: 'Learn SpringBoot',
             time: '25'
         },
@@ -40,6 +42,7 @@ const App = () => {
     }
 
     const delLogById = (itemId) => {
+        console.log("delete item id: ", itemId);
         const newItems = items.filter(item => item.id !== itemId);
         setItems(newItems);
     }
@@ -47,7 +50,7 @@ const App = () => {
     return <>
         <LogForm className="card" onSaveLogForm={saveLogForm}></LogForm>
         <div className="learn-logs">
-            {items.length ? <LearnLogs items={items} onDelLog={delLogById} /> : <div className="emptyLogs">No Learning Record</div>}
+            <LearnLogs items={items} onDelLog={delLogById} />
         </div>
     </>;
 };
