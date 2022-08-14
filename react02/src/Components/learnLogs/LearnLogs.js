@@ -16,7 +16,7 @@ const LearnLogs = (props) => {
         setYear(year);
     };
 
-    return <div>
+    return <>
         <LogFilter onChangeFilter={changeFilter} year={year}></LogFilter>
         {filterData.length ? filterData.map((item) => <LogsItem
             key={item.id}
@@ -24,7 +24,7 @@ const LearnLogs = (props) => {
             desc={item.desc}
             time={item.time}
             onDelLog={() => props.onDelLog(item.id)} />) : <div className="emptyLogs">No Learning Record</div>}
-    </div>;
+    </>;
 };
 
 export default LearnLogs;
