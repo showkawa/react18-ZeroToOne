@@ -4,14 +4,16 @@ import App from '../src/App';
 import { shallow } from 'enzyme'
 import React from 'react'
 
-describe('测试', () => {
-  test('测试 snapshot', () => {
+describe('___App_Test_Case____', () => {
+  test('01_Test_UI_Component_By_Enzyme', () => {
     const wrapper = shallow(<App />)
+    const appContent = wrapper.find('.App').text();
+    expect(appContent).toBe('DDDDD');
   })
 
-  test('renders learn react link', () => {
+  test('02_Test_UI_Component_By_Testing_Library_React', () => {
     render(<App />);
-    const linkElement = screen.getByText(/learn react/i);
+    const linkElement = screen.getByText('DDDDD');
     expect(linkElement).toBeInTheDocument();
   })
 });
