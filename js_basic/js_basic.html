@@ -34,6 +34,9 @@
         arr2 = ["A380", "A355", "A330", "A310"];
         const [d, e, ...f] = arr2;   //  ...变量， 会接受后边所有的元素
         console.log("d=" + d, "e=" + e, "f=" + f);
+        //跳过中间的某个值
+        const [aa,,,dd]= arr2;
+        console.log(aa,dd);
 
         const info = {
             id: 12323,
