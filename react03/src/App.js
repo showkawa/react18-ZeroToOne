@@ -1,10 +1,9 @@
 import './App.css';
+import Meals from './component/Meals/Meals';
 
 function App() {
   return (
-    <div className="App" style={{width:300,height:200,backgroundColor:"#fba"}}>
-        DDDDD
-    </div>
+    <Meals></Meals>
   );
 }
 

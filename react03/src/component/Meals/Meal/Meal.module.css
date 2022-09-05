@@ -1,0 +1,41 @@
+.Meal {
+    display: flex;
+    padding: 20rem;
+    border-bottom: 1px #f2f2f2 solid;
+    align-items: center;
+}
+
+.ImgBox {
+    width: 600rem;
+}
+
+img {
+    width: 100%;
+}
+
+.Title {
+    font-weight: normal;
+    font-size: 18px;
+    margin: 0;
+}
+
+.Desc {
+    color: #bbb;
+}
+
+.PriceWapper {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20rem;
+    padding: 0 20rem;
+}
+
+.Price {
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.Price::before {
+    content: '¥';
+    font-size: 12px;
+}
