@@ -1,13 +1,12 @@
 import Meal from "./Meal/Meal";
 import classes from './Meals.module.css';
 
-const Meals = () => {
+const Meals = (props) => {
     return (<div className={classes.Meals}>
-        <Meal/>
-        <Meal/>
-        <Meal/>
-        <Meal/>
-        <Meal/>
+        {
+            props.meals.map(meal => <Meal key={meal.id} meal={meal} onAdd={props.onAdd} onSub={props.onSub}/>)
+        }
+
     </div>);
 }
 
