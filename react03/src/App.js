@@ -1,6 +1,8 @@
 import './App.css';
 import React from 'react'
 import Meals from './component/Meals/Meals';
+import CartContext from './store/CartContext';
+import FilterMeals from './component/FilterMeals/FilterMeals';
 
 const MEAL_DATA = [
   {
@@ -58,7 +60,7 @@ function App() {
   });
 
   // add hanbao
-  const addMealHandler = (meal) => {
+  const addItem = (meal) => {
 
     const newCarts = { ...carts };
     // estimate if currant meal in the carts
@@ -78,13 +80,13 @@ function App() {
   }
 
   // sub hanbao
-  const subMealHandler = (meal) => {
+  const removeItem = (meal) => {
 
     const newCarts = { ...carts };
     // estimate if currant meal in the carts
     if (--meals.amount <= 0) {
       // remove meal from carts
-      newCarts.items.splice(newCarts.items.indexOf(meal),1);
+      newCarts.items.splice(newCarts.items.indexOf(meal), 1);
     } else {
       // update amount
       meal.amount -= 1;
@@ -99,7 +101,11 @@ function App() {
 
 
   return (
-    <Meals meals={meals} onAdd={addMealHandler} onSub={subMealHandler} />
+    <CartContext.Provider value={{ ...carts, addItem, removeItem }}>
+      <FilterMeals/>
+      <Meals meals={meals} />
+    </CartContext.Provider>
+
   );
 }
 
