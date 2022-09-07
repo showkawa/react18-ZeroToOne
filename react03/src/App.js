@@ -99,10 +99,16 @@ function App() {
     }
   }
 
+  const filterItems = (keyword) => {
+    console.log(keyword)
+   const filteredMeals = MEAL_DATA.filter(item => item.title.indexOf(keyword) !== -1);
+   console.log({...filteredMeals})
+   setMeals(filteredMeals);
+  }
 
   return (
     <CartContext.Provider value={{ ...carts, addItem, removeItem }}>
-      <FilterMeals/>
+      <FilterMeals onFilter = {filterItems}/>
       <Meals meals={meals} />
     </CartContext.Provider>
 

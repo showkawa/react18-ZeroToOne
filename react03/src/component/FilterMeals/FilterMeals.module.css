@@ -25,12 +25,12 @@
     background-color: #f2f2f2;
     padding-left: 50rem;
     outline: none;
+    font-size: 20rem;
 }
 
 .SearchIcon {
     color: #757775;
-    font-size: 30rem;
+    font-size: 40rem;
     position: absolute;
     left: 10rem;
-    /* top: 15rem; */
 }
