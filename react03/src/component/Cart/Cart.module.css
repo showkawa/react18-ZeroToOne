@@ -10,6 +10,7 @@
     height: 80rem;
     background-color: #333;
     border-radius: 20px;
+    z-index: 29;
 
 }
 
@@ -38,13 +39,17 @@
     text-align: center;
 }
 
-.Price {
+
+.Price,.NoMeal {
     display: flex;
     color: #fff;
     margin-left: 120rem;
     align-items: center;
     font-weight: bold;
     font-size: 36rem;
+}
+.NoMeal {
+    color: #aaa;
 }
 
 .Price::before {
@@ -58,4 +63,8 @@
     width: 200rem;
     border-radius: 20px;
     font-size: 36rem;
+}
+.Disable {
+    background-color: #777;
+    color: #aaa;
 }
