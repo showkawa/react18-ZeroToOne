@@ -1,0 +1,61 @@
+.Cart {
+    position: fixed;
+    bottom: 20rem;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+    margin: auto;
+    width: 700rem;
+    height: 80rem;
+    background-color: #333;
+    border-radius: 20px;
+
+}
+
+.Icon {
+    width: 80rem;
+    position: absolute;
+    top: -10rem;
+    left: 0;
+}
+
+.Icon img {
+    width: 100%;
+    height: 100rem;
+}
+
+.TotalAmount {
+    position: absolute;
+    right: -10rem;
+    width: 36rem;
+    height: 36rem;
+    background-color: red;
+    border-radius: 18rem;
+    color: white;
+    font-size: 20rem;
+    font-weight: bold;
+    text-align: center;
+}
+
+.Price {
+    display: flex;
+    color: #fff;
+    margin-left: 120rem;
+    align-items: center;
+    font-weight: bold;
+    font-size: 36rem;
+}
+
+.Price::before {
+    content: '¥';
+    font-size: 28rem;
+}
+
+.Button {
+    border: none;
+    background-color: #FCBF49;
+    width: 200rem;
+    border-radius: 20px;
+    font-size: 36rem;
+}
