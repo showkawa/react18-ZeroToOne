@@ -1,13 +1,22 @@
 import classes from './Cart.module.css';
 import iconImg from '../../asset/bag.png';
 import CartContext from '../../store/CartContext';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
+import CartDetails from './CartDetails/CartDetails';
 
 const Cart = () => {
 
     const ctx = useContext(CartContext);
 
-    return (<div className={classes.Cart}>
+    const [showDetails, setShowDetails] = useState(false);
+
+    const toggleDetailsHandler = () => {
+        if(ctx.totalAmount ===0) {return}
+        setShowDetails(preValue => !preValue);
+    }
+
+    return (<div className={classes.Cart} onClick={toggleDetailsHandler}>
+        {showDetails && <CartDetails />}
         <div className={classes.Icon}>
             <img src={iconImg} alt="bag" />
             {

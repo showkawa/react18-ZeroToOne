@@ -6,11 +6,17 @@
 }
 
 .ImgBox {
-    width: 600rem;
+    min-width: 200rem;
+    max-width: 600rem;
 }
 
 img {
     width: 100%;
+    max-width: 200rem;
+}
+
+.DescBox {
+    flex: auto;
 }
 
 .Title {
@@ -21,7 +27,7 @@ img {
 
 .Desc {
     color: #bbb;
-    font-size:20rem;
+    font-size: 20rem;
 }
 
 .PriceWapper {
