@@ -3,6 +3,7 @@ import iconImg from '../../asset/bag.png';
 import CartContext from '../../store/CartContext';
 import { useContext, useState } from 'react';
 import CartDetails from './CartDetails/CartDetails';
+import Checkout from './Checkout/Checkout';
 
 const Cart = () => {
 
@@ -10,13 +11,28 @@ const Cart = () => {
 
     const [showDetails, setShowDetails] = useState(false);
 
+    const [showCheckout, setShowCheckout] = useState(false);
+
     const toggleDetailsHandler = () => {
-        if(ctx.totalAmount ===0) {return}
+        if (ctx.totalAmount === 0) { return }
         setShowDetails(preValue => !preValue);
     }
 
+    const showCheckoutHandler = (e) => {
+        // e.stopPropagation();
+        if (ctx.totalAmount === 0) { return }
+        setShowCheckout(true);
+    }
+
+
+
+
     return (<div className={classes.Cart} onClick={toggleDetailsHandler}>
-        {showDetails && <CartDetails />}
+
+        {/* {showCheckout && <Checkout />} */}
+
+        {(showDetails && ctx.totalAmount !== 0) ? <CartDetails /> : null}
+
         <div className={classes.Icon}>
             <img src={iconImg} alt="bag" />
             {
@@ -26,7 +42,7 @@ const Cart = () => {
         {
             ctx.totalPrice === 0 ? <p className={classes.NoMeal}>请选择商品</p> : <p className={classes.Price}>{ctx.totalPrice}</p>
         }
-        <button className={`${classes.Button} ${ctx.totalPrice === 0 ? classes.Disable : ''}`}>去结算</button>
+        <button className={`${classes.Button} ${ctx.totalPrice === 0 ? classes.Disable : ''}`} onClick={showCheckoutHandler}>去结算</button>
     </div>);
 }
 

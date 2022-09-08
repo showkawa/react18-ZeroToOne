@@ -99,19 +99,29 @@ function App() {
       setCarts(newCarts);
     }
   }
+  const clearItem = () => {
+    
+    const newCarts = { ...carts };
+    newCarts.items.forEach(item => delete item.amount);
+
+    newCarts.items = [];
+    newCarts.totalAmount = 0;
+    newCarts.totalPrice = 0;
+    setCarts(newCarts);
+  }
 
   const filterItems = (keyword) => {
     console.log(keyword)
-   const filteredMeals = MEAL_DATA.filter(item => item.title.indexOf(keyword) !== -1);
-   console.log({...filteredMeals})
-   setMeals(filteredMeals);
+    const filteredMeals = MEAL_DATA.filter(item => item.title.indexOf(keyword) !== -1);
+    console.log({ ...filteredMeals })
+    setMeals(filteredMeals);
   }
 
   return (
-    <CartContext.Provider value={{ ...carts, addItem, removeItem }}>
-      <FilterMeals onFilter = {filterItems}/>
+    <CartContext.Provider value={{ ...carts, addItem, removeItem, clearItem }}>
+      <FilterMeals onFilter={filterItems} />
       <Meals meals={meals} />
-      <Cart/>
+      <Cart />
     </CartContext.Provider>
 
   );
