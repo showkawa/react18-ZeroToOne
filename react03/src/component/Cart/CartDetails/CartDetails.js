@@ -22,8 +22,8 @@ const CartDetails = () => {
     const okHandler =() => {
         ctx.clearItem();
     }
-    return (<Backdrop onClick={cancelHandler}>
-        {showConfirm && <Confirm confirmText={'确认清空购物车吗？'} onCancel={cancelHandler} onOk={okHandler} />}
+    return (<Backdrop>
+        {showConfirm && <Confirm onClick={cancelHandler} confirmText={'确认清空购物车吗？'} onCancel={cancelHandler} onOk={okHandler} />}
         <div className={classes.CartDetails} onClick={e => e.stopPropagation()}>
             <header className={classes.Header}>
                 <h2 className={classes.Title}>餐品详情</h2>

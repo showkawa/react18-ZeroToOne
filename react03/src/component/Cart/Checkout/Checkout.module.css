@@ -5,4 +5,56 @@
     right: 0;
     bottom: 0;
     z-index: 39;
+    background-color: #eee;
+    padding: 10rem;
+}
+.Close {
+    color: #000;
+    font-size: 30rem;
+}
+.MealsDesc {
+    background-color: #fff;
+    border-radius: 20rem;
+    padding: 0 40rem;
+}
+.Header {
+    border-bottom: 1px solid #f2f2f2;
+    height: 80rem;
+    font-size: 18rem;
+    display: flex;
+    align-items: center;
+}
+.Footer {
+    border-top: 1px dashed #f2f2f2;
+    height: 120rem;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    font-weight: bold;
+    font-size: 40rem;
+    position: relative;
+}
+.Footer::before,.Footer::after {
+    content: '';
+    height: 20rem;
+    width: 20rem;
+    background-color: #eee;
+    border-radius: 50%;
+    position: absolute;
+    left: -50rem;
+    top: -10rem;
+}
+
+.Footer::after {
+    left:auto;
+    right: -50rem;
+}
+.TotalPrice::before {
+    content: '合计 ¥ ';
+    font-size: 16rem;
+    font-weight: normal;
+}
+.Meals {
+    max-height: 900rem;
+    overflow: auto;
 }
