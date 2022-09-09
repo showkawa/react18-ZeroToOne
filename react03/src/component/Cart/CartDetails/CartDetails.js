@@ -12,7 +12,8 @@ const CartDetails = () => {
 
     const [showConfirm, setShowConfirm] = useState(false);
 
-    const showConfirmHandler = () => {
+    const showConfirmHandler = (e) => {
+        // e.stopPropagation();
         setShowConfirm(true);
     }
     const cancelHandler =(e) => {
@@ -20,7 +21,8 @@ const CartDetails = () => {
         setShowConfirm(false);
     }
     const okHandler =() => {
-        ctx.clearItem();
+        // ctx.clearItem();
+        ctx.cartsDispatch({type:'CLEAR'});
     }
     return (<Backdrop>
         {showConfirm && <Confirm onClick={cancelHandler} confirmText={'确认清空购物车吗？'} onCancel={cancelHandler} onOk={okHandler} />}

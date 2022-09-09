@@ -2,7 +2,7 @@ import Backdrop from '../Backdrop/Backdrop';
 import classes from './Confirm.module.css';
 
 const Confirm = (props) => {
-    return (<Backdrop className={classes.ConfirmOuter} onClick={props.onCancel()}>
+    return (<Backdrop className={classes.ConfirmOuter} onClick={(e) => props.onCancel(e)}>
         <div className={classes.Confirm}>
             <p className={classes.ConfirmText}>{props.confirmText}</p>
             <div>

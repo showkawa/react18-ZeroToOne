@@ -9,11 +9,13 @@ const Counter = (props) => {
     const ctxCart = useContext(CartContext);
 
     const addButtonHandler = () => {
-        ctxCart.addItem(props.meal);
+        // ctxCart.addItem(props.meal);
+        ctxCart.cartsDispatch({ type: 'ADD', meal: props.meal });
     }
 
     const subButtonHandler = () => {
-        ctxCart.removeItem(props.meal);
+        // ctxCart.removeItem(props.meal);
+        ctxCart.cartsDispatch({ type: 'REMOVE', meal: props.meal });
     }
 
     return (
