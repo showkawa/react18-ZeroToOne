@@ -1,0 +1,27 @@
+{
+  "kind": "collectionType",
+  "collectionName": "hanbaos",
+  "info": {
+    "singularName": "hanbao",
+    "pluralName": "hanbaos",
+    "displayName": "hanbao"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "desc": {
+      "type": "text"
+    },
+    "price": {
+      "type": "integer"
+    },
+    "img": {
+      "type": "string"
+    }
+  }
+}
