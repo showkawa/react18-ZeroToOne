@@ -9,7 +9,6 @@ const Bar = (props) => {
             <div className={classes.TotalPrice}>{props.totalPrice}</div>
             <button className={classes.Button}>去支付</button>
         </div>
-
     );
 }
 

@@ -1,54 +1,9 @@
 import './App.css';
-import React, { useReducer } from 'react'
+import React, { useEffect, useReducer } from 'react'
 import Meals from './component/Meals/Meals';
 import CartContext from './store/CartContext';
 import FilterMeals from './component/FilterMeals/FilterMeals';
 import Cart from './component/Cart/Cart';
-
-const MEAL_DATA = [
-  {
-    id: 1,
-    title: '鲜虾汉堡',
-    desc: '大堡口福桶含1个新奥尔良烤鸡腿堡，2块新奥尔良烤翅，2块香辣鸡翅，1块吮指原味鸡，1个红豆派，1份醇香土豆泥，2杯百事可乐',
-    price: 18,
-    img: '/image/meals/1.png',
-  },
-  {
-    id: 2,
-    title: '老干妈汉堡',
-    desc: '大堡口福桶含1个新奥尔良烤鸡腿堡，2块新奥尔良烤翅，2块香辣鸡翅，1块吮指原味鸡，1个红豆派，1份醇香土豆泥，2杯百事可乐',
-    price: 25,
-    img: '/image/meals/2.png',
-  },
-  {
-    id: 3,
-    title: '周黑鸭汉堡',
-    desc: '大堡口福桶含1个新奥尔良烤鸡腿堡，2块新奥尔良烤翅，2块香辣鸡翅，1块吮指原味鸡，1个红豆派，1份醇香土豆泥，2杯百事可乐',
-    price: 28,
-    img: '/image/meals/3.png',
-  },
-  {
-    id: 4,
-    title: '鱼面汉堡',
-    desc: '大堡口福桶含1个新奥尔良烤鸡腿堡，2块新奥尔良烤翅，2块香辣鸡翅，1块吮指原味鸡，1个红豆派，1份醇香土豆泥，2杯百事可乐',
-    price: 15,
-    img: '/image/meals/4.png',
-  },
-  {
-    id: 5,
-    title: '咸鸭蛋汉堡',
-    desc: '大堡口福桶含1个新奥尔良烤鸡腿堡，2块新奥尔良烤翅，2块香辣鸡翅，1块吮指原味鸡，1个红豆派，1份醇香土豆泥，2杯百事可乐',
-    price: 12,
-    img: '/image/meals/5.png',
-  },
-  {
-    id: 6,
-    title: '佛跳墙汉堡',
-    desc: '大堡口福桶含1个新奥尔良烤鸡腿堡，2块新奥尔良烤翅，2块香辣鸡翅，1块吮指原味鸡，1个红豆派，1份醇香土豆泥，2杯百事可乐',
-    price: 88,
-    img: '/image/meals/6.png',
-  }];
-
 
 
 const cartsReducer = (params, action) => {
@@ -58,23 +13,24 @@ const cartsReducer = (params, action) => {
     case 'ADD':
       if (newCarts.items.indexOf(action.meal) === -1) {
         newCarts.items.push(action.meal);
-        action.meal.amount = 1;
+        action.meal.attributes.amount = 1;
       } else {
-        action.meal.amount += 1;
+        action.meal.attributes.amount += 1;
       }
       newCarts.totalAmount += 1;
-      newCarts.totalPrice += action.meal.price;
+      newCarts.totalPrice += action.meal.attributes.price;
       return newCarts;
 
     case 'REMOVE':
-      if (--action.meal.amount <= 0) {
+      if (--action.meal.attributes.amount <= 0) {
         newCarts.items.splice(newCarts.items.indexOf(action.meal), 1);
       }
       newCarts.totalAmount -= 1;
-      newCarts.totalPrice -= action.meal.price;
+      newCarts.totalPrice -= action.meal.attributes.price;
       return newCarts;
+
     case 'CLEAR':
-      newCarts.items.forEach(item => delete item.amount);
+      newCarts.items.forEach(item => delete item.attributes.amount);
       newCarts.items = [];
       newCarts.totalAmount = 0;
       newCarts.totalPrice = 0;
@@ -87,14 +43,26 @@ const cartsReducer = (params, action) => {
 
 function App() {
 
-  const [meals, setMeals] = React.useState(MEAL_DATA);
-
+  useEffect(() => {
+    fetch(`http://localhost:1337/api/hanbaos`)
+      .then(res => {
+        return res.json();
+      })
+      .then(res => {
+        console.log(res.data)
+        setTimeout(()=> setMeals(res.data),500);
+      })
+      .catch(error => { console.error(error) })
+      .finally(() => { })
+  }, []);
 
   const [carts, cartsDispatch] = useReducer(cartsReducer, {
     items: [],
     totalAmount: 0,
     totalPrice: 0
   });
+
+  const [meals, setMeals] = React.useState([]);
 
   // const [carts, setCarts] = React.useState({
   //   items: [],
@@ -150,8 +118,7 @@ function App() {
   // }
 
   const filterItems = (keyword) => {
-    console.log(keyword)
-    const filteredMeals = MEAL_DATA.filter(item => item.title.indexOf(keyword) !== -1);
+    const filteredMeals = meals.filter(item => item.attributes.title.indexOf(keyword) !== -1);
     setMeals(filteredMeals);
   }
 

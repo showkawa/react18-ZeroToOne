@@ -21,7 +21,7 @@ const Cart = () => {
     const showCheckoutHandler = useCallback(() => {
         if (ctx.totalAmount === 0) { return }
         setShowCheckout(true);
-    }, [showCheckout]);
+    },[ctx]);
 
 
     const hideCheckoutHandler = (e) => {
@@ -30,7 +30,6 @@ const Cart = () => {
     }
 
     useEffect(() => {
-        console.log('--- trigger useEffect ---')
         if (ctx.totalAmount === 0) {
             setShowDetails(false);
             setShowCheckout(false);

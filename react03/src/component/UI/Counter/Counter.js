@@ -9,24 +9,22 @@ const Counter = (props) => {
     const ctxCart = useContext(CartContext);
 
     const addButtonHandler = () => {
-        // ctxCart.addItem(props.meal);
         ctxCart.cartsDispatch({ type: 'ADD', meal: props.meal });
     }
 
     const subButtonHandler = () => {
-        // ctxCart.removeItem(props.meal);
         ctxCart.cartsDispatch({ type: 'REMOVE', meal: props.meal });
     }
 
     return (
         <div className={classes.Counter}>
             {
-                (props.meal.amount && props.meal.amount !== 0) ? (
+                (props.meal.attributes.amount && props.meal.attributes.amount !== 0) ? (
                     <>
                         <button className={classes.Sub} onClick={subButtonHandler}>
                             <FontAwesomeIcon icon={faMinus} />
                         </button>
-                        <span className={classes.Count}>{props.meal.amount}</span>
+                        <span className={classes.Count}>{props.meal.attributes.amount}</span>
                     </>
                 ) : null
             }
