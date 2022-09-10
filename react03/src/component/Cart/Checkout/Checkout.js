@@ -11,7 +11,7 @@ import Bar from './Bar/Bar';
 const checkoutRoot = document.getElementById('checkout-root');
 
 const Checkout = (props) => {
-
+console.log('--- Checkout ---', props);
     const ctx = useContext(CartContext);
     return ReactDOM.createPortal(<div className={classes.Checkout}>
         <div className={classes.Close} >

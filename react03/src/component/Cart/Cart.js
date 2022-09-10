@@ -1,7 +1,7 @@
 import classes from './Cart.module.css';
 import iconImg from '../../asset/bag.png';
 import CartContext from '../../store/CartContext';
-import { useContext, useEffect, useState } from 'react';
+import { useCallback, useContext, useEffect, useState } from 'react';
 import CartDetails from './CartDetails/CartDetails';
 import Checkout from './Checkout/Checkout';
 
@@ -18,10 +18,11 @@ const Cart = () => {
         setShowDetails(preValue => !preValue);
     }
 
-    const showCheckoutHandler = (e) => {
+    const showCheckoutHandler = useCallback(() => {
         if (ctx.totalAmount === 0) { return }
         setShowCheckout(true);
-    }
+    }, [showCheckout]);
+
 
     const hideCheckoutHandler = (e) => {
         e.stopPropagation();
