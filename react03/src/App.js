@@ -4,6 +4,7 @@ import Meals from './component/Meals/Meals';
 import CartContext from './store/CartContext';
 import FilterMeals from './component/FilterMeals/FilterMeals';
 import Cart from './component/Cart/Cart';
+import useFetch from './hocks/useFetch';
 
 
 const cartsReducer = (params, action) => {
@@ -49,17 +50,22 @@ function App() {
     totalPrice: 0
   });
 
-  const [meals, setMeals] = useState([]);
+  const { data: meals, setData: setMeals, loading, fetchData } = useFetch({
+    api: '/hanbaos',
+    method: 'get'
+  });
 
-  const [loading, setLoading] = useState(false);
+  // const [meals, setMeals] = useState([]);
 
-  const fetchData = async () => {
-    setLoading(true);
-    const res = await fetch(`http://localhost:1337/api/hanbaos`);
-    const jsonData = await res.json();
-    setTimeout(() => setMeals(jsonData.data), 500);
-    setLoading(false);
-  }
+  // const [loading, setLoading] = useState(false);
+
+  // const fetchData = async () => {
+  //   setLoading(true);
+  //   const res = await fetch(`http://localhost:1337/api/hanbaos`);
+  //   const jsonData = await res.json();
+  //   setTimeout(() => setMeals(jsonData.data), 500);
+  //   setLoading(false);
+  // }
 
   useEffect(() => {
     fetchData();
