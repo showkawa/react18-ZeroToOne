@@ -1,5 +1,5 @@
 import './App.css';
-import React, { useEffect, useReducer } from 'react'
+import React, { useEffect, useReducer, useState } from 'react'
 import Meals from './component/Meals/Meals';
 import CartContext from './store/CartContext';
 import FilterMeals from './component/FilterMeals/FilterMeals';
@@ -43,26 +43,27 @@ const cartsReducer = (params, action) => {
 
 function App() {
 
-  useEffect(() => {
-    fetch(`http://localhost:1337/api/hanbaos`)
-      .then(res => {
-        return res.json();
-      })
-      .then(res => {
-        console.log(res.data)
-        setTimeout(()=> setMeals(res.data),500);
-      })
-      .catch(error => { console.error(error) })
-      .finally(() => { })
-  }, []);
-
   const [carts, cartsDispatch] = useReducer(cartsReducer, {
     items: [],
     totalAmount: 0,
     totalPrice: 0
   });
 
-  const [meals, setMeals] = React.useState([]);
+  const [meals, setMeals] = useState([]);
+
+  const [loading, setLoading] = useState(false);
+
+  const fetchData = async () => {
+    setLoading(true);
+    const res = await fetch(`http://localhost:1337/api/hanbaos`);
+    const jsonData = await res.json();
+    setTimeout(() => setMeals(jsonData.data), 500);
+    setLoading(false);
+  }
+
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   // const [carts, setCarts] = React.useState({
   //   items: [],
@@ -126,7 +127,8 @@ function App() {
     // <CartContext.Provider value={{ ...carts, addItem, removeItem, clearItem }}>
     <CartContext.Provider value={{ ...carts, cartsDispatch }}>
       <FilterMeals onFilter={filterItems} />
-      <Meals meals={meals} />
+      {!loading && <Meals meals={meals} />}
+      {loading && <p>Loading...</p>}
       <Cart />
     </CartContext.Provider>
 
