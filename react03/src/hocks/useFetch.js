@@ -14,9 +14,12 @@ const useFetch = (req, cb) => {
             headers: { 'Content-Type': 'application/json' },
             body: req.body ? JSON.stringify(req.body) : null
         });
-        const jsonData = await res.json();
-        setTimeout(() => setData(jsonData.data), 500);
-        cb && cb();
+        if (res.status && res.status === 200) {
+            const jsonData = await res.json();
+            setTimeout(() => setData(jsonData.data), 500);
+            cb && cb();
+        }
+
         setLoading(false);
     }, [])
 
