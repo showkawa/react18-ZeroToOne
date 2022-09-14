@@ -1,12 +1,19 @@
 import './App.css';
-import React, { useEffect, useReducer } from 'react'
-import Meals from './component/Meals/Meals';
+import React, { useReducer, useState } from 'react'
 import CartContext from './store/CartContext';
-import FilterMeals from './component/FilterMeals/FilterMeals';
-import Cart from './component/Cart/Cart';
-import useFetch from './hocks/useFetch';
-import { configureStore } from '@reduxjs/toolkit';
-
+import { Route } from 'react-router-dom';
+import Home from './component/Home/Home';
+import Shopping from './component/Shopping/Shopping';
+import Member from './component/Member/Member';
+import Bonus from './component/Bonus/Bonus';
+import BottomNavigation from '@mui/material/BottomNavigation';
+import BottomNavigationAction from '@mui/material/BottomNavigationAction';
+import RestoreIcon from '@mui/icons-material/Restore';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import ArchiveIcon from '@mui/icons-material/Archive';
+import Paper from '@mui/material/Paper';
+import { Link, Redirect, Switch, useHistory, useLocation } from 'react-router-dom/cjs/react-router-dom.min';
+import Wechat from './component/Bonus/Wechat/Wechat';
 
 const cartsReducer = (params, action) => {
   const newCarts = { ...params };
@@ -43,17 +50,6 @@ const cartsReducer = (params, action) => {
   }
 }
 
-
-// const store = configureStore(cartsReducer, {
-//   items: [],
-//   totalAmount: 0,
-//   totalPrice: 0
-// });
-
-// store.subscribe(() => { })
-
-// store.dispatch(() => { })
-
 function App() {
 
   const [carts, cartsDispatch] = useReducer(cartsReducer, {
@@ -62,27 +58,51 @@ function App() {
     totalPrice: 0
   });
 
-  const { data: meals, setData: setMeals, loading, fetchData } = useFetch({
-    api: '/hanbaos',
-    method: 'get'
-  });
+  const [value, setValue] = useState('/');
 
-  useEffect(() => {
-    fetchData();
-  }, []);
+  const _history = useHistory();
 
-  const filterItems = (keyword) => {
-    const filteredMeals = meals.filter(item => item.attributes.title.indexOf(keyword) !== -1);
-    setMeals(filteredMeals);
+  const gotoHander = (event, newValue) => {
+    setValue(newValue);
+    _history.push(newValue);
+  }
+
+  const homeProps = {
+    name: 'hanbao'
+  }
+
+  const memberProps = {
+    name: 'member',
+    params: {}
+
   }
 
   return (
-    // <CartContext.Provider value={{ ...carts, addItem, removeItem, clearItem }}>
     <CartContext.Provider value={{ ...carts, cartsDispatch }}>
-      <FilterMeals onFilter={filterItems} />
-      {!loading && <Meals meals={meals} />}
-      {loading && <p>Loading...</p>}
-      <Cart />
+
+      {/* <Route exact path = '/' component ={Home}/> */}
+      <Route exact path='/' children={<Home {...homeProps} />} />
+      <Route path='/bonus' component={Bonus} />
+      <Switch>
+        <Route exact path='/bonus/wechat' component={Wechat} />
+      </Switch>
+      <Route exact path='/shopping' component={Shopping} />
+      <Route exact path='/home' component={Home} />
+      <Route path='/member' render={() => <Member {...memberProps} />} />
+
+
+      <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }} elevation={1}>
+        <BottomNavigation
+          showLabels
+          value={value}
+          onChange={gotoHander}
+        >
+          <BottomNavigationAction label="Home" value="/" icon={<RestoreIcon />} />
+          <BottomNavigationAction label="Bonus Plan" value="/bonus" icon={<FavoriteIcon />} />
+          <BottomNavigationAction label="Store" value="/shopping" icon={<ArchiveIcon />} />
+          <BottomNavigationAction label="Member" value={`/member/${homeProps.name}`} icon={<ArchiveIcon />} />
+        </BottomNavigation>
+      </Paper>
     </CartContext.Provider>
 
   );

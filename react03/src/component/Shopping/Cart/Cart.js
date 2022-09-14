@@ -1,6 +1,6 @@
 import classes from './Cart.module.css';
-import iconImg from '../../asset/bag.png';
-import CartContext from '../../store/CartContext';
+import iconImg from '../../../asset/bag.png';
+import CartContext from '../../../store/CartContext';
 import { useCallback, useContext, useEffect, useState } from 'react';
 import CartDetails from './CartDetails/CartDetails';
 import Checkout from './Checkout/Checkout';

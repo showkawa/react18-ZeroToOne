@@ -1,5 +1,5 @@
 import classes from './CheckoutItem.module.css';
-import Counter from '../../../UI/Counter/Counter';
+import Counter from '../../../../UI/Counter/Counter';
 const CheckoutItem = (props) => {
     return (
         <div className={classes.CheckoutItem}>

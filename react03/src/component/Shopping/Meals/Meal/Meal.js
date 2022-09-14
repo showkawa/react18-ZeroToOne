@@ -1,4 +1,4 @@
-import Counter from '../../UI/Counter/Counter';
+import Counter from '../../../UI/Counter/Counter';
 import classes from './Meal.module.css';
 
 const Meal = (props) => {

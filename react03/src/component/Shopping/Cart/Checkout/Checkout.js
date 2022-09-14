@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { useContext } from 'react';
-import CartContext from '../../../store/CartContext';
+import CartContext from '../../../../store/CartContext';
 import CheckoutItem from './CheckoutItem/CheckoutItem';
 import Bar from './Bar/Bar';
 
