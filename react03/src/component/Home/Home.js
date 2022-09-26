@@ -1,12 +1,52 @@
-import { Alert } from "@mui/material";
+import { useSelector } from "react-redux";
+import * as React from 'react';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
 
-const Home = (props) => {
-    return (<>
-        <Alert severity="error">This is an error alert — check it out!</Alert>
-        <Alert severity="warning">This is a warning alert — check it out!</Alert>
-        <Alert severity="info">This is an info alert — check it out!</Alert>
-        <Alert severity="success">This is a success alert — check it out!</Alert>
-    </>);
+function createData(
+    id,
+    username,
+    email,
+    confirmed
+) {
+    return { id, username, email, confirmed };
 }
 
-export default Home;
+export default function Home() {
+    // useSelector用来加载state中的数据
+    const member = useSelector(state => state.member);
+
+    const rows = [
+        createData(member.id, member.username, member.email, member.confirmed),
+
+    ];
+    return (
+        <TableContainer component={Paper}>
+            <Table sx={{ minWidth: 30 }} size="small" aria-label="a dense table">
+                <TableHead>
+                    <TableRow>
+                        <TableCell>ID</TableCell>
+                        <TableCell align="center">UserName</TableCell>
+                        <TableCell align="center">Email</TableCell>
+                        <TableCell align="center">Confirmed</TableCell>
+                    </TableRow>
+                </TableHead>
+                <TableBody>
+                    {rows.map((row) => (
+                        <TableRow key={row.id}>
+                            <TableCell>{row.id}</TableCell>
+                            <TableCell align="center">{row.username}</TableCell>
+                            <TableCell align="center">{row.email}</TableCell>
+                            <TableCell align="center">{row.confirmed ? 'true' : 'false'}</TableCell>
+                        </TableRow>
+                    ))}
+                </TableBody>
+            </Table>
+        </TableContainer>
+    );
+}
