@@ -39,7 +39,16 @@ export default function Home() {
     // const changeEmail = () => {
     //     dispatch(setEmail('111222333@qq.com'))
     // }
-    const { data, isSuccess, isLoading } = useGetHanbaoListQuery();
+    const { data, isSuccess, isLoading } = useGetHanbaoListQuery(null, {
+        selectFromResult: result => { // 指定useQuery的返回结果，可以对返回结果二次加工
+            return result;
+        },
+        pollingInterval:0,//设置轮训的时间 单位毫秒
+        skip:false, //是否跳过当前请求， 默认false
+        refetchOnMountOrArgChange:false, //设置是否每次的都加载数据， false使用缓存，true每次加载数据，数字缓存的时间
+        refetchOnFocus: true, // 是否在重新获取焦点时重载数据
+        refetchOnReconnect: true //是否在重新连接后重载数据
+    });
 
     return (
         <>

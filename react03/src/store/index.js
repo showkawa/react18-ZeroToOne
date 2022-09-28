@@ -1,3 +1,4 @@
+import { setupListeners } from "@reduxjs/toolkit/dist/query";
 import hanbaoApi from "./HanbaoApi";
 
 //使用RTK构建store
@@ -11,5 +12,7 @@ const store =  configureStore({
     middleware: getDefaultMiddleware => getDefaultMiddleware().concat(hanbaoApi.middleware)
 
 })
+
+setupListeners(store.dispatch) // 设置以后将会支持， refetchOnFocus, refetchOnReconnect
 
 export default store;
