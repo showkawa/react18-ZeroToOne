@@ -1,31 +1,17 @@
+import hanbaoApi from "./HanbaoApi";
+import { hanbaoReducer } from "./HanbaoSlice";
+import { memberReducer } from "./MemberSlice";
+
 //使用RTK构建store
-const { createSlice, configureStore } = require("@reduxjs/toolkit");
-
-const memberSlice = createSlice({
-    name: 'member',// 会自动生成action中的type
-    initialState: { // init的state
-        id: 1,
-        username: 'kawa',
-        email: '123123@qq.com',
-        confirmed: true
-    },
-    reducers: {//指定state的各种操作
-        setUsername(state, action) { // state是一个代理对象，可以直接修改
-            state.username = 'cassiel'
-        },
-        setEmail(state, action) {
-            state.email = '1361231323@qq.com'
-        }
-    }
-})
-
-export const { setUsername, setEmail } = memberSlice.actions;
+const { configureStore, getDefaultMiddleware } = require("@reduxjs/toolkit");
 
 
 const store =  configureStore({
     reducer: {
-        member: memberSlice.reducer
-    }
+        [hanbaoApi.reducerPath]:hanbaoApi.reducer
+    },
+    middleware: getDefaultMiddleware => getDefaultMiddleware().concat(hanbaoApi.middleware)
+
 })
 
 export default store;
