@@ -1,16 +1,17 @@
 import TableCell from '@mui/material/TableCell';
 import { TextField } from "@mui/material";
-import { useGetHanbaoByIdQuery } from '../../../store/HanbaoApi';
+// import { useGetHanbaoByIdQuery } from '../../../store/HanbaoApi';
 import  {useState } from 'react';
 import TableRow from '@mui/material/TableRow';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare, faTrashCan, faCheck, faXmark } from "@fortawesome/free-solid-svg-icons";
 import classes from './Hanbao.module.css';
+import { useDeleteHaobaoMutation } from '../../../store/HanbaoApi';
 const Hanbao = (props) => {
     const { row } = props;
     const [isEdit, setIsEdit] = useState(false);
-    const {data:hanbao, isSuccess,isLoading} = useGetHanbaoByIdQuery(row.id)     
-
+    // const {data:hanbao, isSuccess,isLoading} = useGetHanbaoByIdQuery(row.id)    
+    const [delHanbao, result]= useDeleteHaobaoMutation() // 第一个是操作的触发器，第二个是结果集
 
     const editHanbao = (row) => {
         setIsEdit(true);
@@ -18,6 +19,8 @@ const Hanbao = (props) => {
     }
     const deleteHanbao = (id) => {
         console.log(id);
+        delHanbao(id);
+        console.log(result)
     }
 
     const saveEdit = (row) => {
