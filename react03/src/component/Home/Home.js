@@ -1,4 +1,3 @@
-import { useDispatch, useSelector } from "react-redux";
 import * as React from 'react';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -7,13 +6,12 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { Button, CircularProgress, LinearProgress } from "@mui/material";
-import { setEmail } from "../../store/MemberSlice";
-import { setPrice } from "../../store/HanbaoSlice";
-import { useGetHanbaoListQuery } from "../../store/HanbaoApi";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPenToSquare, faTrashCan } from "@fortawesome/free-solid-svg-icons";
-import classes from './Home.module.css';
+import {CircularProgress } from "@mui/material";
+// import { setEmail } from "../../store/MemberSlice";
+// import { setPrice } from "../../store/HanbaoSlice";
+import {useGetHanbaoListQuery } from "../../store/HanbaoApi";
+
+import Hanbao from "./Hanbao/Hanbao";
 
 
 function createData(
@@ -43,7 +41,6 @@ export default function Home() {
     // }
     const { data, isSuccess, isLoading } = useGetHanbaoListQuery();
 
-
     return (
         <>
             {isLoading && <CircularProgress />}
@@ -60,25 +57,10 @@ export default function Home() {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {data.map((row) => (
-                            <TableRow key={row.id}>
-                                <TableCell>{row.id}</TableCell>
-                                <TableCell align="center">{row.attributes.title}</TableCell>
-                                <TableCell align="center">{row.attributes.price}</TableCell>
-                                <TableCell align="center">{row.attributes.desc.slice(0, 10)}</TableCell>
-                                <TableCell align="center">{row.attributes.img.slice(-5)}</TableCell>
-                                <TableCell align="center" className={classes.Icon}>
-                                    <FontAwesomeIcon icon={faPenToSquare} />
-                                    <FontAwesomeIcon icon={faTrashCan} />
-                                </TableCell>
-                            </TableRow>
-                        ))}
+                        {data.map((row) => (<Hanbao key={row.id} row={row} />))}
                     </TableBody>
                 </Table>
             </TableContainer>}
-            {/* <Button variant="contained" onClick={changeEmail}>Update</Button> */}
-
-            {/* <Button variant="outlined" onClick={() => dispatch(setPrice(35))}>Update Price</Button> */}
         </>
     );
 }

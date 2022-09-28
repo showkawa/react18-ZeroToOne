@@ -12,11 +12,22 @@ const hanbaoApi = createApi({
                 query() {
                     return 'hanbaos'
                 },
-                transformResponse(baseQueryReturnValue){
-                    return baseQueryReturnValue.data;
+                transformResponse(baseQueryReturnValue) {
+                    let data = Object.create(baseQueryReturnValue.data);
+                    data.map(item => Object.defineProperty(item, 'isEdit', {
+                        value: false,
+                        writable: true
+                    }));
+                   console.log(data,Object.isFrozen(data))
+                    return data;
                 }
             }),
-            getHanbaoById: build.query(),
+            getHanbaoById: build.query({
+                query(id) {
+                    return `hanbaos/${id}`;  
+                },
+
+            }),
             updateHaobao: build.mutation()
         }
     }
@@ -24,5 +35,5 @@ const hanbaoApi = createApi({
 })
 // Api对象创建后，对象中会根据各种方法生成对应的钩子函数
 // 通过这些钩子函数可以向服务期发送请求，钩子函数的命名规则 getHanbanList -> useGetHanbaoListQuery
-export const { useGetHanbaoListQuery } = hanbaoApi;
+export const { useGetHanbaoListQuery,useGetHanbaoByIdQuery } = hanbaoApi;
 export default hanbaoApi;

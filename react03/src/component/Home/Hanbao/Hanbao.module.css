@@ -1,0 +1,10 @@
+.Icon {}
+
+svg {
+    font-size: 20rem;
+    margin: 0 5rem;
+}
+
+svg:hover {
+    cursor: pointer;
+}
