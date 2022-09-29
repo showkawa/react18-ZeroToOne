@@ -4,20 +4,24 @@ const { createSlice } = require("@reduxjs/toolkit");
 const memberSlice = createSlice({
     name: 'member',// 会自动生成action中的type
     initialState: { // init的state
-        id: 1,
-        username: 'kawa',
-        email: '123123@qq.com',
-        confirmed: true
+        isLogged: false,
+        token: null,
+        user: null
     },
     reducers: {//指定state的各种操作
-        setUsername(state, action) { // state是一个代理对象，可以直接修改
-            state.username = action.payload;
+        login(state, action) { // state是一个代理对象，可以直接修改
+            state.isLogged = true;
+            state.token = action.payload.token;
+            state.user = action.payload.user;
+
         },
-        setEmail(state, action) {
-            state.email = action.payload;
+        logout(state, action) {
+            state.isLogged = false;
+            state.token = null;
+            state.user = null;
         }
     }
 })
 
-export const { setUsername, setEmail } = memberSlice.actions;
-export const { reducer: memberReducer } = memberSlice;
+export const { login, logout } = memberSlice.actions;
+export default memberSlice;

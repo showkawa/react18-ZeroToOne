@@ -1,15 +1,19 @@
 import { setupListeners } from "@reduxjs/toolkit/dist/query";
 import hanbaoApi from "./HanbaoApi";
+import memberApi from "./MemberApi";
+import memberSlice from "./MemberSlice";
 
 //使用RTK构建store
-const { configureStore, getDefaultMiddleware } = require("@reduxjs/toolkit");
+const { configureStore } = require("@reduxjs/toolkit");
 
 
-const store =  configureStore({
+const store = configureStore({
     reducer: {
-        [hanbaoApi.reducerPath]:hanbaoApi.reducer
+        [hanbaoApi.reducerPath]: hanbaoApi.reducer,
+        [memberApi.reducerPath]: memberApi.reducer,
+        member: memberSlice.reducer
     },
-    middleware: getDefaultMiddleware => getDefaultMiddleware().concat(hanbaoApi.middleware)
+    middleware: getDefaultMiddleware => getDefaultMiddleware().concat(hanbaoApi.middleware).concat(memberApi.middleware)
 
 })
 

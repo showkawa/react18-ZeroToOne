@@ -14,6 +14,7 @@ import ArchiveIcon from '@mui/icons-material/Archive';
 import Paper from '@mui/material/Paper';
 import { Link, Redirect, Switch, useHistory, useLocation } from 'react-router-dom/cjs/react-router-dom.min';
 import Wechat from './component/Bonus/Wechat/Wechat';
+import Login from './component/Login/Login';
 
 const cartsReducer = (params, action) => {
   const newCarts = { ...params };
@@ -59,6 +60,7 @@ function App() {
   });
 
   const [value, setValue] = useState('/');
+  const [hide, setHide] = useState(false);
 
   const _history = useHistory();
 
@@ -76,33 +78,38 @@ function App() {
     params: {}
 
   }
+  const hideMenu = () => {
+    setHide(true);
+  }
 
   return (
     <CartContext.Provider value={{ ...carts, cartsDispatch }}>
 
-      {/* <Route exact path = '/' component ={Home}/> */}
-      <Route exact path='/' children={<Home {...homeProps} />} />
-      <Route path='/bonus' component={Bonus} />
-      <Switch>
-        <Route exact path='/bonus/wechat' component={Wechat} />
-      </Switch>
-      <Route exact path='/shopping' component={Shopping} />
-      <Route exact path='/home' component={Home} />
-      <Route path='/member' render={() => <Member {...memberProps} />} />
+      {!hide && <>
+        <Route exact path='/' children={<Home {...homeProps} />} />
+        <Route path='/bonus' component={Bonus} />
+        <Switch>
+          <Route exact path='/bonus/wechat' component={Wechat} />
+        </Switch>
+        <Route exact path='/shopping' component={Shopping} onClick={hideMenu} />
+        <Route exact path='/home' component={Home} />
+        <Route exact path='/login-out' component={Login} />
+        <Route path='/member' render={() => <Member {...memberProps} />} />
 
 
-      <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }} elevation={1}>
-        <BottomNavigation
-          showLabels
-          value={value}
-          onChange={gotoHander}
-        >
-          <BottomNavigationAction label="Home" value="/" icon={<RestoreIcon />} />
-          <BottomNavigationAction label="Bonus Plan" value="/bonus" icon={<FavoriteIcon />} />
-          <BottomNavigationAction label="Store" value="/shopping" icon={<ArchiveIcon />} />
-          <BottomNavigationAction label="Member" value={`/member/${homeProps.name}`} icon={<ArchiveIcon />} />
-        </BottomNavigation>
-      </Paper>
+        <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }} elevation={1}>
+          <BottomNavigation
+            showLabels
+            value={value}
+            onChange={gotoHander}
+          >
+            <BottomNavigationAction label="Home" value="/" icon={<RestoreIcon />} />
+            <BottomNavigationAction label="Bonus Plan" value="/bonus" icon={<FavoriteIcon />} />
+            <BottomNavigationAction label="Store" value="/shopping" icon={<ArchiveIcon />} />
+            <BottomNavigationAction label="Member" value={`/member/${homeProps.name}`} icon={<ArchiveIcon />} />
+          </BottomNavigation>
+        </Paper></>}
+
     </CartContext.Provider>
 
   );

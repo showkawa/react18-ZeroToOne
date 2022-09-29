@@ -6,49 +6,29 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import {CircularProgress } from "@mui/material";
+import { CircularProgress, Grid } from "@mui/material";
 // import { setEmail } from "../../store/MemberSlice";
 // import { setPrice } from "../../store/HanbaoSlice";
-import {useGetHanbaoListQuery } from "../../store/HanbaoApi";
+import { useGetHanbaoListQuery } from "../../store/HanbaoApi";
 
 import Hanbao from "./Hanbao/Hanbao";
+import { useSelector } from 'react-redux';
 
-
-function createData(
-    id,
-    username,
-    email,
-    confirmed
-) {
-    return { id, username, email, confirmed };
-}
 
 export default function Home() {
-    // // useSelector用来加载state中的数据
-    // const rct = useSelector(state => state);
-    // const member = rct.member;
-    // const hanbao = rct.hanbao;
-
-    // const rows = [
-    //     createData(member.id, member.username, member.email, member.confirmed),
-
-    // ];
-
-    // const dispatch = useDispatch();
-
-    // const changeEmail = () => {
-    //     dispatch(setEmail('111222333@qq.com'))
-    // }
     const { data, isSuccess, isLoading } = useGetHanbaoListQuery(null, {
         selectFromResult: result => { // 指定useQuery的返回结果，可以对返回结果二次加工
             return result;
         },
-        pollingInterval:0,//设置轮训的时间 单位毫秒
-        skip:false, //是否跳过当前请求， 默认false
-        refetchOnMountOrArgChange:false, //设置是否每次的都加载数据， false使用缓存，true每次加载数据，数字缓存的时间
+        pollingInterval: 0,//设置轮训的时间 单位毫秒
+        skip: false, //是否跳过当前请求， 默认false
+        refetchOnMountOrArgChange: false, //设置是否每次的都加载数据， false使用缓存，true每次加载数据，数字缓存的时间
         refetchOnFocus: true, // 是否在重新获取焦点时重载数据
         refetchOnReconnect: true //是否在重新连接后重载数据
     });
+
+    const member = useSelector(state => state.member);
+    console.log(member);
 
     return (
         <>
@@ -70,6 +50,11 @@ export default function Home() {
                     </TableBody>
                 </Table>
             </TableContainer>}
+            <Grid container spacing={2}>
+                <Grid item xs={12}>
+                   {member.token}
+                </Grid>
+            </Grid>
         </>
     );
 }
