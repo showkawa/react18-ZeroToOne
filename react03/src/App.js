@@ -1,7 +1,7 @@
 import './App.css';
 import React, { useReducer, useState } from 'react'
 import CartContext from './store/CartContext';
-import { Route } from 'react-router-dom';
+import { Route, Switch, useHistory  } from 'react-router-dom';
 import Home from './component/Home/Home';
 import Shopping from './component/Shopping/Shopping';
 import Member from './component/Member/Member';
@@ -12,9 +12,8 @@ import RestoreIcon from '@mui/icons-material/Restore';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ArchiveIcon from '@mui/icons-material/Archive';
 import Paper from '@mui/material/Paper';
-import { Link, Redirect, Switch, useHistory, useLocation } from 'react-router-dom/cjs/react-router-dom.min';
-import Wechat from './component/Bonus/Wechat/Wechat';
 import Login from './component/Login/Login';
+import Auth from './component/Auth/Auth';
 
 const cartsReducer = (params, action) => {
   const newCarts = { ...params };
@@ -85,30 +84,41 @@ function App() {
   return (
     <CartContext.Provider value={{ ...carts, cartsDispatch }}>
 
-      {!hide && <>
-        <Route exact path='/' children={<Home {...homeProps} />} />
-        <Route path='/bonus' component={Bonus} />
-        <Switch>
-          <Route exact path='/bonus/wechat' component={Wechat} />
-        </Switch>
-        <Route exact path='/shopping' component={Shopping} onClick={hideMenu} />
-        <Route exact path='/home' component={Home} />
-        <Route exact path='/login-out' component={Login} />
-        <Route path='/member' render={() => <Member {...memberProps} />} />
+      {!hide &&
+        <>
+          <Switch>
+            <Route exact path='/'>
+              <Home {...homeProps} />
+            </Route>
+            <Route path='/bonus'>
+              <Bonus />
+            </Route>
+            <Auth exact path='/shopping' onClick={hideMenu}>
+              <Shopping />
+            </Auth>
+            <Route exact path='/home'>
+              <Home />
+            </Route>
+            <Route exact path='/login-out'>
+              <Login />
+            </Route>
+            <Route path='/member'>
+              <Member {...memberProps} />
+            </Route>
+          </Switch>
 
-
-        <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }} elevation={1}>
-          <BottomNavigation
-            showLabels
-            value={value}
-            onChange={gotoHander}
-          >
-            <BottomNavigationAction label="Home" value="/" icon={<RestoreIcon />} />
-            <BottomNavigationAction label="Bonus Plan" value="/bonus" icon={<FavoriteIcon />} />
-            <BottomNavigationAction label="Store" value="/shopping" icon={<ArchiveIcon />} />
-            <BottomNavigationAction label="Member" value={`/member/${homeProps.name}`} icon={<ArchiveIcon />} />
-          </BottomNavigation>
-        </Paper></>}
+          <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }} elevation={1}>
+            <BottomNavigation
+              showLabels
+              value={value}
+              onChange={gotoHander}>
+              <BottomNavigationAction label="Home" value="/" icon={<RestoreIcon />} />
+              <BottomNavigationAction label="Bonus Plan" value="/bonus" icon={<FavoriteIcon />} />
+              <BottomNavigationAction label="Store" value="/shopping" icon={<ArchiveIcon />} />
+              <BottomNavigationAction label="Member" value={`/member/${homeProps.name}`} icon={<ArchiveIcon />} />
+            </BottomNavigation>
+          </Paper>
+        </>}
 
     </CartContext.Provider>
 

@@ -2,7 +2,7 @@ import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { Button, FormControl, IconButton, InputAdornment, InputLabel, OutlinedInput, TextField } from "@mui/material";
 import { useRef, useState } from "react";
 import { useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import { useLoginMutation, useRegisterMutation } from "../../store/MemberApi";
 import { login } from "../../store/MemberSlice";
 import classes from './Login.module.css';
@@ -25,6 +25,8 @@ const Login = () => {
 
     const dispatch = useDispatch();
     const _history = useHistory();
+    const _location = useLocation();
+
 
     const handleChange = (prop) => (event) => {
         setValues({ ...values, [prop]: event.target.value });
@@ -68,7 +70,7 @@ const Login = () => {
                         token: res.data.jwt,
                         user: res.data.user
                     }))
-                    _history.push('/home');
+                    _history.push(_location.state.from.pathname);
                 }
             })
         }

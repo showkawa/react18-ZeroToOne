@@ -11,7 +11,7 @@ const store = configureStore({
     reducer: {
         [hanbaoApi.reducerPath]: hanbaoApi.reducer,
         [memberApi.reducerPath]: memberApi.reducer,
-        member: memberSlice.reducer
+        [memberSlice.name]: memberSlice.reducer
     },
     middleware: getDefaultMiddleware => getDefaultMiddleware().concat(hanbaoApi.middleware).concat(memberApi.middleware)
 

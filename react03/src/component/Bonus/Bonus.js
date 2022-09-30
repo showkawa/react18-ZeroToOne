@@ -1,17 +1,33 @@
-import { Skeleton } from "@mui/material";
-import { useHistory, useLocation, useParams, useRouteMatch } from "react-router-dom/cjs/react-router-dom";
+import { Link, Route, Switch, useRouteMatch } from "react-router-dom";
+import Wechat from "./Wechat/Wechat";
 
 const Bonus = (props) => {
-    const match = useRouteMatch();
-    const _location = useLocation();
-    const _history = useHistory();
-    const params = useParams();
-    console.log(match, _location, _history, params);
-    return (<>
-        <Skeleton />
-        <Skeleton animation="wave" />
-        <Skeleton animation={false} />
-    </>);
+    let { path, url } = useRouteMatch();
+
+    return (
+      <div>
+        <ul>
+          <li>
+            <Link to={`${url}/rendering`}>Rendering with React</Link>
+          </li>
+          <li>
+            <Link to={`${url}/components`}>Components</Link>
+          </li>
+          <li>
+            <Link to={`${url}/props-v-state`}>Props v. State</Link>
+          </li>
+        </ul>
+  
+        <Switch>
+          <Route exact path={path}>
+            <h3>Please select a topic.</h3>
+          </Route>
+          <Route path={`${path}/:topicId`}>
+            <Wechat />
+          </Route>
+        </Switch>
+      </div>
+    );
 }
 
 export default Bonus;

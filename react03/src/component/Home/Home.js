@@ -7,12 +7,10 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { CircularProgress, Grid } from "@mui/material";
-// import { setEmail } from "../../store/MemberSlice";
-// import { setPrice } from "../../store/HanbaoSlice";
 import { useGetHanbaoListQuery } from "../../store/HanbaoApi";
-
 import Hanbao from "./Hanbao/Hanbao";
-import { useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
+
 
 
 export default function Home() {
@@ -26,9 +24,6 @@ export default function Home() {
         refetchOnFocus: true, // 是否在重新获取焦点时重载数据
         refetchOnReconnect: true //是否在重新连接后重载数据
     });
-
-    const member = useSelector(state => state.member);
-    console.log(member);
 
     return (
         <>
@@ -52,7 +47,6 @@ export default function Home() {
             </TableContainer>}
             <Grid container spacing={2}>
                 <Grid item xs={12}>
-                   {member.token}
                 </Grid>
             </Grid>
         </>
