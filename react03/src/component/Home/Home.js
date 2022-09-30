@@ -9,7 +9,6 @@ import Paper from '@mui/material/Paper';
 import { CircularProgress, Grid } from "@mui/material";
 import { useGetHanbaoListQuery } from "../../store/HanbaoApi";
 import Hanbao from "./Hanbao/Hanbao";
-import { useParams } from 'react-router-dom';
 
 
 

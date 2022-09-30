@@ -14,9 +14,7 @@ import ArchiveIcon from '@mui/icons-material/Archive';
 import Paper from '@mui/material/Paper';
 import Login from './component/Login/Login';
 import Auth from './component/Auth/Auth';
-import { useDispatch, useSelector } from 'react-redux';
-import { logout } from './store/MemberSlice';
-import { useEffect } from 'react';
+import useLogout from './hocks/useLogout';
 
 const cartsReducer = (params, action) => {
   const newCarts = { ...params };
@@ -84,19 +82,7 @@ function App() {
     setHide(true);
   }
 
-  const { expirationTime } = useSelector(state => state.member);
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    const timeout = expirationTime - Date.now();
-    const timer = setTimeout(() => {
-      dispatch(logout());
-    }, timeout);
-
-    return () => {
-      clearTimeout(timer);
-    }
-  }, [expirationTime])
+  useLogout()
 
   return (
     <CartContext.Provider value={{ ...carts, cartsDispatch }}>
