@@ -1,7 +1,7 @@
 import './App.css';
 import React, { useReducer, useState } from 'react'
 import CartContext from './store/CartContext';
-import { Route, Switch, useHistory  } from 'react-router-dom';
+import { Route, Switch, useHistory } from 'react-router-dom';
 import Home from './component/Home/Home';
 import Shopping from './component/Shopping/Shopping';
 import Member from './component/Member/Member';
@@ -14,6 +14,9 @@ import ArchiveIcon from '@mui/icons-material/Archive';
 import Paper from '@mui/material/Paper';
 import Login from './component/Login/Login';
 import Auth from './component/Auth/Auth';
+import { useDispatch, useSelector } from 'react-redux';
+import { logout } from './store/MemberSlice';
+import { useEffect } from 'react';
 
 const cartsReducer = (params, action) => {
   const newCarts = { ...params };
@@ -80,6 +83,20 @@ function App() {
   const hideMenu = () => {
     setHide(true);
   }
+
+  const { expirationTime } = useSelector(state => state.member);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const timeout = expirationTime - Date.now();
+    const timer = setTimeout(() => {
+      dispatch(logout());
+    }, timeout);
+
+    return () => {
+      clearTimeout(timer);
+    }
+  }, [expirationTime])
 
   return (
     <CartContext.Provider value={{ ...carts, cartsDispatch }}>

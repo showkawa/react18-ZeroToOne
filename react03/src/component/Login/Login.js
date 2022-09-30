@@ -70,7 +70,7 @@ const Login = () => {
                         token: res.data.jwt,
                         user: res.data.user
                     }))
-                    _history.push(_location.state.from.pathname);
+                    _history.push(_location.state?.from?.pathname || '/');
                 }
             })
         }
